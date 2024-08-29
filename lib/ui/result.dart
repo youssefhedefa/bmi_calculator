@@ -1,6 +1,6 @@
 import 'package:bmi_calculator/helper/color_helper.dart';
 import 'package:bmi_calculator/helper/text_style_helper.dart';
-import 'package:bmi_calculator/models/classification_result.dart';
+import 'package:bmi_calculator/ui/widgets/classifications.dart';
 import 'package:bmi_calculator/ui/widgets/gauge.dart';
 import 'package:flutter/material.dart';
 
@@ -21,9 +21,12 @@ class ResultScreen extends StatelessWidget {
                 style: AppTextStyleHelper.font30PrimaryBold,
               ),
               const Gauge(
-                value: 30,
+                value: 20,
               ),
-              const ListOfClassifications(),
+              const ListOfClassifications(
+                value: 20,
+              ),
+              const SizedBox(height: 30),
               MaterialButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -49,53 +52,3 @@ class ResultScreen extends StatelessWidget {
   }
 }
 
-class ListOfClassifications extends StatelessWidget {
-  const ListOfClassifications({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.separated(
-        itemBuilder: (context, index) => Classification(
-          model: ClassificationResultModel(
-            label: 'Normal',
-            confidence: '30%',
-            isSelected: index == 0,
-          ),
-        ),
-        separatorBuilder: (context, index) => const SizedBox(
-          height: 20,
-        ),
-        itemCount: 4,
-      ),
-    );
-  }
-}
-
-class Classification extends StatelessWidget {
-  const Classification({super.key, required this.model});
-
-  final ClassificationResultModel model;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          model.confidence,
-          style: buildStyle(),
-        ),
-        const Spacer(),
-        Text(
-          model.label,
-          style: buildStyle(),
-        ),
-      ],
-    );
-  }
-  buildStyle() {
-    return model.isSelected ? AppTextStyleHelper.font30PrimaryBold.copyWith(
-      fontSize: 24,
-    ) : AppTextStyleHelper.font22GreyMedium;
-  }
-}

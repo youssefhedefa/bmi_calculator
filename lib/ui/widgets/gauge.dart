@@ -17,7 +17,7 @@ class _GaugeState extends State<Gauge> {
   double opacity = 0;
   @override
   void initState() {
-    Future.delayed(const Duration(milliseconds: 0), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       setState(() {
         opacity = 1;
       });
