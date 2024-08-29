@@ -5,7 +5,9 @@ import 'package:bmi_calculator/ui/widgets/gauge.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key});
+  const ResultScreen({super.key, required this.value});
+
+  final double value;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,11 @@ class ResultScreen extends StatelessWidget {
                 'Your BMI Result',
                 style: AppTextStyleHelper.font30PrimaryBold,
               ),
-              const Gauge(
-                value: 20,
+               Gauge(
+                value: value,
               ),
-              const ListOfClassifications(
-                value: 20,
+               ListOfClassifications(
+                value: value,
               ),
               const SizedBox(height: 30),
               MaterialButton(

@@ -2,12 +2,12 @@ import 'package:bmi_calculator/helper/text_style_helper.dart';
 import 'package:flutter/material.dart';
 
 class CustomSlider extends StatefulWidget {
-  const CustomSlider({super.key, required this.max, required this.min, required this.label});
+  const CustomSlider({super.key, required this.max, required this.min, required this.label, this.setValue});
 
-  final double max ;
-  final double min ;
-  final String label ;
-
+  final double max;
+  final double min;
+  final String label;
+  final Function? setValue;
 
   @override
   State<CustomSlider> createState() => _CustomSliderState();
@@ -39,6 +39,7 @@ class _CustomSliderState extends State<CustomSlider> {
             setState(() {
               _currentSliderValue = value;
             });
+            widget.setValue!(value);
           },
         ),
       ],

@@ -1,11 +1,37 @@
+import 'dart:developer';
 import 'package:bmi_calculator/helper/color_helper.dart';
 import 'package:bmi_calculator/helper/text_style_helper.dart';
+import 'package:bmi_calculator/ui/result.dart';
 import 'package:bmi_calculator/ui/widgets/custom_slider.dart';
 import 'package:bmi_calculator/ui/widgets/gender.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  double height = 160;
+  double weight = 127.5;
+  late double bmi;
+  setHeight(double value) {
+    height = value;
+  }
+
+  setWeight(double value) {
+    weight = value;
+  }
+
+  calculateBMI() {
+    double heightInMeter = height / 100;
+    bmi = weight / (heightInMeter * heightInMeter);
+    log(bmi.toString());
+    return bmi;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +51,33 @@ class HomeScreen extends StatelessWidget {
               const GenderSelection(),
               const SizedBox(height: 30),
               buildLabel(label: 'Height'),
-              const CustomSlider(
+              CustomSlider(
                 max: 220,
                 min: 100,
                 label: 'cm',
+                setValue: setHeight,
               ),
               const SizedBox(height: 30),
               buildLabel(label: 'Weight'),
-              const CustomSlider(
+              CustomSlider(
                 max: 220,
                 min: 35,
                 label: 'kg',
+                setValue: setWeight,
               ),
               const SizedBox(height: 30),
               MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  calculateBMI();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ResultScreen(
+                      value: bmi,
+                    );
+                  }));
+                },
                 color: AppColorHelper.blueColor,
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),

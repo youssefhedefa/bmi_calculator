@@ -1,5 +1,5 @@
 import 'package:bmi_calculator/helper/color_helper.dart';
-import 'package:bmi_calculator/ui/result.dart';
+import 'package:bmi_calculator/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColorHelper.primaryColor),
         useMaterial3: true,
       ),
-      home: const ResultScreen(),
+      home: const HomeScreen(),
     );
   }
 }
